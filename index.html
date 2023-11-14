@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .canvas-wrapper {
+            width: 410px;
+            height: 684px;
+            background: url('./emoji_new.png') no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas-wrapper">
+        <canvas id="canvas" width="420px" height="684px"></canvas>
+    </div>
+
+    <div class="canvas-wrapper">
+        <canvas id="canvas2" width="420px" height="684px"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext("2d");
+
+        const drawRect = (x1, y1, x2, y2) => {
+            ctx.fillStyle = 'rgba(0, 128, 0, 0.5)'
+            const width = x2 - x1
+            const height = y2 - y1
+            ctx.fillRect(x1, y1, width, height);
+            ctx.closePath();
+        } 
+
+        const emojiWidth = 40
+        const emojiHeight = 40
+        const columnGap = 10
+        const rowGap = 8
+
+        let list = []
+        for(let i = 0; i <= 108; i++) {
+            let rowIndex = Math.floor(i / 8)
+            let columnIndex = i % 8
+            console.log(rowIndex, columnIndex)
+            const coords = [] 
+            list.push(coords)
+
+            // 左上角的点坐标
+            let x1 = columnGap +  columnIndex * (emojiWidth + columnGap)
+            let y1 = rowGap + rowIndex * (emojiHeight + rowGap)
+
+            // 右下角的点坐标
+            let x2 = x1 + emojiWidth
+            let y2 = y1 + emojiHeight
+
+            drawRect(x1, y1, x2, y2)
+
+        }
+    </script>
+
+    <script>
+        ;(() => {
+            const canvas = document.querySelector('#canvas2')
+            const ctx = canvas.getContext("2d");
+
+            const drawRect = (x1, y1, x2, y2) => {
+                ctx.fillStyle = 'rgba(0, 128, 0, 0.5)'
+                const width = x2 - x1
+                const height = y2 - y1
+                ctx.fillRect(x1, y1, width, height);
+                ctx.closePath();
+            } 
+
+            const emojiWidth = 30
+            const emojiHeight = 30
+            const columnInnerGap = 20
+            const columnOuterGap = 15
+
+            const rowInnerGap = 18
+            const rowOuterGap = 15
+
+            let list = []
+            for(let i = 0; i <= 108; i++) {
+                let rowIndex = Math.floor(i / 8)
+                let columnIndex = i % 8
+                console.log(rowIndex, columnIndex)
+                const coords = [] 
+                list.push(coords)
+
+                // 左上角的点坐标
+                let x1 = columnOuterGap +  columnIndex * (emojiWidth + columnInnerGap)
+                let y1 = rowOuterGap + rowIndex * (emojiHeight + rowInnerGap)
+
+                // 右下角的点坐标
+                let x2 = x1 + emojiWidth
+                let y2 = y1 + emojiHeight
+
+                drawRect(x1, y1, x2, y2)
+
+            }
+        })()
+
+    </script>
+</body>
+</html>
